@@ -6,12 +6,12 @@ module Finnegans
     include Finnegans::Core::Request
     include Finnegans::Core::Authentication
 
-    attr_reader :client_id, :endpoint, :api_catalog_path, :namespace
+    attr_reader :client_id, :base_url, :api_catalog_path, :namespace
 
-    def initialize(client_id:, client_secret:, endpoint:, api_catalog_path: 'apicatalog', namespace: Finnegans.resources_namespace)
+    def initialize(client_id:, client_secret:, base_url:, api_catalog_path: 'apicatalog', namespace: Finnegans.resources_namespace)
       @client_id = client_id.to_s
       @client_secret = client_secret.to_s
-      @endpoint = endpoint.to_s.gsub(/\/+$/, '')
+      @base_url = base_url.to_s.gsub(/\/+$/, '')
       @api_catalog_path = api_catalog_path
 
       namespace = namespace.to_s
