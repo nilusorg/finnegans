@@ -58,6 +58,10 @@ module Finnegans
 
     attr_reader :client_secret, :access_token
 
+    def access_token=(value)
+      @access_token = value
+    end
+
     def authenticate
       begin
         authenticate!
@@ -69,11 +73,11 @@ module Finnegans
     def authenticate!
       return if ready?
 
-      (@access_token = get_access_token) && nil
+      (self.access_token = get_access_token) && nil
     end
 
     def ready?
-      !!@access_token
+      !!access_token
     end
 
     def catalog(refresh: false)
@@ -106,7 +110,7 @@ module Finnegans
     end
 
     def refresh_authentication!
-      @access_token = refresh_access_token
+      self.access_token = refresh_access_token
     end
 
     def defined_resources
