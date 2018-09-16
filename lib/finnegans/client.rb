@@ -8,10 +8,11 @@ module Finnegans
 
     attr_reader :client_id, :base_url, :api_catalog_path, :namespace
 
-    def initialize(client_id:, client_secret:, base_url:, api_catalog_path: 'apicatalog', namespace: Finnegans.resources_namespace)
+    def initialize(client_id:, client_secret:, base_url:, access_token: nil, api_catalog_path: 'apicatalog', namespace: Finnegans.resources_namespace)
       @client_id = client_id.to_s
       @client_secret = client_secret.to_s
       @base_url = base_url.to_s.gsub(/\/+$/, '')
+      @access_token = access_token
       @api_catalog_path = api_catalog_path
 
       namespace = namespace.to_s
