@@ -9,6 +9,7 @@ require "finnegans/client"
 
 module Finnegans
   @@resources_namespace = ''
+  @@api_catalog_path = ''
 
   DEFAULT_USER_AGENT = "Finnegans API Client v#{Finnegans::VERSION}".freeze
   private_constant :DEFAULT_USER_AGENT
@@ -31,6 +32,9 @@ module Finnegans
   class AuthenticationError < RequestError; end
 
   class << self
+    def api_catalog_path
+      @@api_catalog_path
+    end
     def resources_namespace
       @@resources_namespace
     end
@@ -39,6 +43,10 @@ module Finnegans
       yield self
     end
 
+    def api_catalog_path=(value)
+      value = value.to_s
+      @@api_catalog_path = (value.empty? ? nil : value)
+    end
     def resources_namespace=(value)
       value = value.to_s
       @@resources_namespace = (value.empty? ? nil : value)
