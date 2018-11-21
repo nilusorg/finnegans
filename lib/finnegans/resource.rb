@@ -44,6 +44,16 @@ module Finnegans
       end.compact
     end
 
+    def create(body)
+      ensure_type!(:entity)
+
+      unless actions.include?(:get)
+        raise ActionError.new, "The :get action is not available for this resource. Only #{actions} are available"
+      end
+
+      client.request("/#{code}", body: body.to_json, headers: { 'Content-Type' => 'application/json' }, method: :post)
+    end
+
     def get(resource_id)
       ensure_type!(:entity)
 

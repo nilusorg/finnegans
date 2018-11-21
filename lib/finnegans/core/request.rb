@@ -17,7 +17,6 @@ module Finnegans
         end
 
         request_params[:headers] = default_headers.merge(request_params[:headers] || {})
-
         request = Typhoeus::Request.new("#{@base_url}#{resource}", request_params)
         request.run
         request.response
